@@ -1,0 +1,13 @@
+- name: Create task to run a PS script as NETWORK service on boot
+  community.windows.win_scheduled_task:
+    name: Task1
+    description: Run a PowerShell script
+    actions:
+    - path: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+      arguments: -ExecutionPolicy Unrestricted -NonInteractive -File C:\TestDir\Test.ps1
+    triggers:
+    - type: daily
+      start_boundary: '2023-04-04T09:00:00'
+    username: SYSTEM
+    run_level: highest
+    state: present
